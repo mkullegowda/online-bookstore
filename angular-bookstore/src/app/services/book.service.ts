@@ -8,13 +8,17 @@ import { map } from 'rxjs/operators';
 })
 export class BookService {
 
-  private baseUlr = "http://localhost:8080/api/v1/books"
+  private baseUrl = "http://localhost:8080/api/v1/books";
+  
   constructor(private httpClient:HttpClient) { }
 
-  getbooks(): Observable<Book[]>{
-    return this.httpClient.get<GetResponseBooks>(this.baseUlr).pipe(
+  getbooks(theCategoryId: number): Observable<Book[]>{
+
+  const searchUrl = `${this.baseUrl}/search/categoryid?id=${theCategoryId}`;
+  //const searchUrl = "http://localhost:8080/api/v1/books/search/categoryid?id=3"
+    return this.httpClient.get<GetResponseBooks>(searchUrl).pipe(
       map(response => response._embedded.books)
-    )
+    );
   }
 
 }
