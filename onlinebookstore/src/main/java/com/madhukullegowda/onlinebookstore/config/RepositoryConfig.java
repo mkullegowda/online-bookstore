@@ -1,4 +1,4 @@
-package com.madhukullegowda.onlinebookstore.comfig;
+package com.madhukullegowda.onlinebookstore.config;
 
 import javax.persistence.EntityManager;
 import javax.persistence.metamodel.Type;
@@ -24,6 +24,9 @@ public class RepositoryConfig implements RepositoryRestConfigurer{
 				.map(Type::getJavaType)
 				.toArray(Class[]::new));
 		
+		config.getCorsRegistry()
+				.addMapping("/**")
+				.allowedOrigins("http://localhost:4200");
 	}
 	
 }
