@@ -40,7 +40,13 @@ searchbooks(keyword: String): Observable<Book[]>{
   private getBooksList(searchUrl: string): Observable<Book[]> {
     return this.httpClient.get<GetResponseBooks>(searchUrl).pipe(map(response => response._embedded.books));
   }
+
+  get(bookId:number):Observable<Book>{
+    const bookDetailsUrl = `${this.baseUrl}/${bookId}`;
+    return this.httpClient.get<Book>(bookDetailsUrl);
+  }
 }
+
 interface GetResponseBooks{
   _embedded:{
     books: Book[];
